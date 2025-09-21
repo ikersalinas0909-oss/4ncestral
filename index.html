@@ -3,250 +3,130 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ultra Interactiva — Demo</title>
+  <title>Ultra Interactiva++</title>
   <style>
     :root{
       --bg:#0f1724; --card:#0b1220; --accent:#7c3aed; --muted:#9aa4b2; --glass: rgba(255,255,255,0.04);
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,system-ui,Arial;color:#e6eef6;background:radial-gradient(1200px 600px at 10% 10%,rgba(124,58,237,0.12),transparent),var(--bg);}
-    .wrap{max-width:1100px;margin:28px auto;padding:22px;}
+    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,system-ui,Arial;color:#e6eef6;background:var(--bg);}
+    body{background:radial-gradient(1200px 600px at 10% 10%,rgba(124,58,237,0.15),transparent),var(--bg);overflow-x:hidden}
+    .wrap{max-width:1200px;margin:28px auto;padding:22px;}
     header{display:flex;gap:12px;align-items:center;justify-content:space-between}
-    h1{font-size:20px;margin:0}
+    h1{font-size:24px;margin:0}
     .controls{display:flex;gap:8px;align-items:center}
-    button, .chip{background:var(--glass);border:0;padding:8px 12px;border-radius:10px;color:inherit;cursor:pointer}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);min-height:140px;position:relative}
-    .card h3{margin:0;margin-bottom:8px;font-size:14px}
+    button, .chip{background:var(--glass);border:0;padding:8px 12px;border-radius:10px;color:inherit;cursor:pointer;transition:transform .2s}
+    button:hover{transform:scale(1.1)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:14px;margin-top:18px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.03),transparent);padding:14px;border-radius:14px;box-shadow:0 6px 18px rgba(2,6,23,0.6);min-height:160px;position:relative;overflow:hidden}
+    .card h3{margin:0;margin-bottom:8px;font-size:16px}
     .muted{color:var(--muted);font-size:13px}
     .live-badge{position:absolute;right:12px;top:12px;padding:6px 8px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#2dd4bf);font-weight:600;font-size:12px}
 
-    /* Game bubbles */
-    #game{display:flex;flex-direction:column;height:320px;align-items:center;justify-content:center;overflow:hidden}
-    #playfield{width:100%;height:100%;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:8px;position:relative}
-    .bubble{position:absolute;border-radius:999px;padding:10px 14px;background:var(--accent);color:#051226;font-weight:700;user-select:none;cursor:pointer}
+    /* Memory Game */
+    #memory{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+    .tile{background:var(--glass);height:80px;display:flex;align-items:center;justify-content:center;font-size:30px;cursor:pointer;border-radius:8px;transition:transform .3s}
+    .tile.revealed{background:var(--accent);color:#051226;}
 
-    /* Drawing canvas */
-    .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    input[type=range]{width:110px}
+    /* Chat bot */
+    #chatBox{max-height:200px;overflow-y:auto;background:var(--glass);padding:8px;border-radius:8px;margin-bottom:8px}
+    .msg{margin:4px 0;padding:6px 8px;border-radius:8px;max-width:70%}
+    .user{background:var(--accent);color:#fff;margin-left:auto}
+    .bot{background:#2dd4bf;color:#051226;margin-right:auto}
 
-    /* Draggable list */
-    .list{display:flex;flex-direction:column;gap:8px}
-    .draggable{padding:10px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);cursor:grab}
-    .draggable:active{cursor:grabbing}
-
-    footer{margin-top:22px;color:var(--muted);font-size:13px;text-align:center}
-
-    /* Responsive */
-    @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)} }
-    @media(max-width:640px){.grid{grid-template-columns:1fr}}
+    /* Snake */
+    #snakeCanvas{background:#111;border-radius:8px;width:100%;max-width:100%;aspect-ratio:1;display:block;margin:auto}
 
     /* Light theme */
     .light{--bg:#eef2ff;--card:#ffffff;--accent:#6d28d9;--muted:#475569;color:#071022}
   </style>
 </head>
 <body>
-  <div class="wrap" id="app">
+  <div class="wrap">
     <header>
       <div>
-        <h1>Ultra Interactiva — Demo</h1>
-        <div class="muted">Una página con mini-juegos, lienzo, arrastrar, tema y accesos rápidos</div>
+        <h1>Ultra Interactiva++</h1>
+        <div class="muted">Ahora con memoria, chat bot y snake 🐍</div>
       </div>
       <div class="controls">
-        <button id="themeBtn" title="Cambiar tema">🌗 Tema (T)</button>
-        <button id="gameBtn" title="Iniciar juego">🎯 Juego (G)</button>
-        <button id="drawBtn" title="Activar lienzo">✏️ Lienzo (D)</button>
-        <div class="chip" id="helpBtn">❓ Atajos</div>
+        <button id="themeBtn">🌗 Tema</button>
+        <button id="confetti">🎉 Confetti</button>
       </div>
     </header>
 
     <div class="grid">
-      <div class="card" id="gameCard">
-        <div class="live-badge">Mini-juego</div>
-        <h3>Pop Bubbles</h3>
-        <div class="muted">Haz click en las burbujas rápido para sumar puntos.</div>
-        <div id="game" style="margin-top:10px">
-          <div id="playfield"></div>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
-          <div class="muted">Puntaje:</div><div id="score">0</div>
-          <button id="restart" style="margin-left:auto">Reiniciar</button>
-        </div>
+      <div class="card">
+        <div class="live-badge">Juego</div>
+        <h3>Juego de Memoria</h3>
+        <div class="muted">Encuentra los pares</div>
+        <div id="memory"></div>
       </div>
 
-      <div class="card" id="drawCard">
-        <h3>Canvas — Dibuja y descarga</h3>
-        <div class="muted">Herramientas básicas, cambia grosor y color. Presiona 'D' para alternar.</div>
-        <div class="toolbar">
-          <label class="muted">Color <input type="color" id="color" value="#7c3aed"></label>
-          <label class="muted">Grosor <input type="range" id="size" min="1" max="40" value="6"></label>
-          <button id="clear">Limpiar</button>
-          <button id="save">Descargar PNG</button>
-        </div>
-        <canvas id="canvas" width="600" height="220" style="display:block;margin-top:8px;border-radius:8px;width:100%;background:linear-gradient(90deg,rgba(255,255,255,0.02),transparent);"></canvas>
+      <div class="card">
+        <div class="live-badge">Snake</div>
+        <h3>Juego clásico Snake</h3>
+        <canvas id="snakeCanvas" width="300" height="300"></canvas>
       </div>
 
-      <div class="card" id="todoCard">
-        <h3>Lista interactiva (arrastrable)</h3>
-        <div class="muted">Arrastra para reordenar — los cambios se guardan localmente.</div>
-        <div style="display:flex;gap:8px;margin-top:8px">
-          <input id="newItem" placeholder="Agregar tarea..." style="flex:1;padding:8px;border-radius:8px;border:0;background:var(--glass)">
-          <button id="addItem">Añadir</button>
-        </div>
-        <div class="list" id="todoList" style="margin-top:10px"></div>
-      </div>
-
-      <div class="card" id="dragCard">
-        <h3>Explora — Elementos arrastrables</h3>
-        <div class="muted">Arrastra los bloques por la tarjeta.</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-          <div class="draggable" draggable="true">🔵 Bloque A</div>
-          <div class="draggable" draggable="true">🟢 Bloque B</div>
-          <div class="draggable" draggable="true">🟠 Bloque C</div>
+      <div class="card">
+        <h3>Mini Chat Bot</h3>
+        <div id="chatBox"></div>
+        <div style="display:flex;gap:8px">
+          <input id="chatInput" placeholder="Escribe algo..." style="flex:1;padding:8px;border-radius:8px;border:0;background:var(--glass)">
+          <button id="chatSend">Enviar</button>
         </div>
       </div>
-
-      <div class="card" id="controlsCard">
-        <h3>Personaliza</h3>
-        <div class="muted">Cambia colores principales y genera confetti.</div>
-        <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
-          <label class="muted">Color principal <input id="primary" type="color" value="#7c3aed"></label>
-          <button id="confetti">🎉 Confetti</button>
-        </div>
-        <div style="margin-top:10px" class="muted">Prueba atajos: T tema — G juego — D lienzo</div>
-      </div>
-
-      <div class="card" id="infoCard">
-        <h3>Accesos rápidos y tips</h3>
-        <div class="muted">Usa el teclado para alternar módulos o guarda tu dibujo cuando termines.</div>
-        <ul>
-          <li class="muted">T = Tema</li>
-          <li class="muted">G = Empezar juego</li>
-          <li class="muted">D = Lienzo</li>
-        </ul>
-      </div>
-
     </div>
 
-    <footer>Hecho con ❤️ — Prueba, modifica y copia lo que quieras.</footer>
+    <footer style="margin-top:22px;color:var(--muted);font-size:13px;text-align:center">Hecho con ❤️ — versión ultra interactiva.</footer>
   </div>
 
   <script>
-    // --- Theme toggle ---
-    const root = document.documentElement;
-    const themeBtn = document.getElementById('themeBtn');
-    function setTheme(light){
-      document.body.classList.toggle('light', !!light);
-      localStorage.setItem('ui_light', !!light);
+    // Theme toggle
+    const themeBtn=document.getElementById('themeBtn');
+    themeBtn.onclick=()=>document.body.classList.toggle('light');
+
+    // Confetti
+    document.getElementById('confetti').onclick=()=>{
+      for(let i=0;i<40;i++){
+        const p=document.createElement('div');
+        p.style.position='fixed';p.style.left=Math.random()*100+'%';p.style.top='-20px';p.style.width='8px';p.style.height='12px';
+        p.style.background=['#f97316','#fb7185','#60a5fa','#7c3aed'][Math.floor(Math.random()*4)];p.style.zIndex=9999;
+        document.body.appendChild(p);
+        p.animate([{transform:'translateY(0)'},{transform:'translateY(120vh)'}],{duration:2000+Math.random()*1000,easing:'linear'}).onfinish=()=>p.remove();
+      }
+    };
+
+    // Memory game
+    const symbols=['🍎','🍎','🍌','🍌','🍇','🍇','🍒','🍒','🥝','🥝','🍑','🍑','🍍','🍍','🥥','🥥'];
+    const memory=document.getElementById('memory');
+    let first=null,lock=false;
+    function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+    function startMemory(){memory.innerHTML='';shuffle([...symbols]).forEach(sym=>{const t=document.createElement('div');t.className='tile';t.textContent='❓';t.onclick=()=>{
+      if(lock||t.classList.contains('revealed'))return; t.textContent=sym; t.classList.add('revealed');
+      if(!first){first=t;}else{if(first.textContent===t.textContent){first=null;}else{lock=true;setTimeout(()=>{first.textContent='❓';t.textContent='❓';first.classList.remove('revealed');t.classList.remove('revealed');first=null;lock=false;},800);} }
+    };memory.appendChild(t);});}
+    startMemory();
+
+    // Snake
+    const canvas=document.getElementById('snakeCanvas');
+    const ctx=canvas.getContext('2d');
+    let snake=[{x:10,y:10}],dir={x:0,y:0},food={x:5,y:5};
+    function draw(){ctx.fillStyle='#111';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='lime';snake.forEach(p=>ctx.fillRect(p.x*15,p.y*15,14,14));ctx.fillStyle='red';ctx.fillRect(food.x*15,food.y*15,14,14);}
+    function update(){const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};snake.unshift(head);if(head.x===food.x&&head.y===food.y){food={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*20)};}else{snake.pop();}
+      if(head.x<0||head.y<0||head.x>19||head.y>19||snake.slice(1).some(p=>p.x===head.x&&p.y===head.y)){snake=[{x:10,y:10}];dir={x:0,y:0};}
     }
-    themeBtn.addEventListener('click', ()=> setTheme(!document.body.classList.contains('light')));
-    setTheme(localStorage.getItem('ui_light')==='true');
+    function loop(){update();draw();setTimeout(loop,150);}loop();
+    document.addEventListener('keydown',e=>{if(e.key==='ArrowUp')dir={x:0,y:-1};if(e.key==='ArrowDown')dir={x:0,y:1};if(e.key==='ArrowLeft')dir={x:-1,y:0};if(e.key==='ArrowRight')dir={x:1,y:0};});
 
-    // Primary color live change
-    document.getElementById('primary').addEventListener('input', e=>{
-      document.documentElement.style.setProperty('--accent', e.target.value);
-      document.getElementById('color').value = e.target.value;
-    });
-
-    // --- Game: pop bubbles ---
-    const playfield = document.getElementById('playfield');
-    const scoreEl = document.getElementById('score');
-    let score = 0, gameInterval, bubbles = [];
-    function spawnBubble(){
-      const b = document.createElement('div');
-      b.className='bubble';
-      const size = 36 + Math.random()*64;
-      b.style.width = b.style.height = size+'px';
-      b.style.left = (Math.random()*80)+'%';
-      b.style.top = (Math.random()*80)+'%';
-      b.textContent = Math.floor(1+Math.random()*9);
-      playfield.appendChild(b);
-
-      b.addEventListener('click', e=>{ score += parseInt(b.textContent); scoreEl.textContent = score; popEffect(b); });
-      bubbles.push(b);
-      // auto-remove after 5s
-      setTimeout(()=>{ if(b.parentElement) b.remove(); },5200);
-    }
-    function startGame(){ stopGame(); score=0;scoreEl.textContent=score; gameInterval = setInterval(spawnBubble,500); }
-    function stopGame(){ clearInterval(gameInterval); bubbles.forEach(b=>b.remove()); bubbles=[]; }
-    document.getElementById('gameBtn').addEventListener('click', ()=> startGame());
-    document.getElementById('restart').addEventListener('click', ()=> startGame());
-
-    function popEffect(el){
-      const r = el.getBoundingClientRect();
-      const pop = document.createElement('div');
-      pop.style.position='absolute'; pop.style.left = (el.offsetLeft+el.offsetWidth/2-20)+'px'; pop.style.top = (el.offsetTop+el.offsetHeight/2-20)+'px';
-      pop.style.width=pop.style.height='40px'; pop.style.borderRadius='50%'; pop.style.background='radial-gradient(circle,#fff4,#fff0)'; pop.style.opacity=0.95; playfield.appendChild(pop);
-      el.remove(); setTimeout(()=>pop.remove(),350);
-    }
-
-    // --- Canvas drawing ---
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-    let drawing=false, last = null;
-    function resizeCanvas(){ const rect = canvas.getBoundingClientRect(); const scale = devicePixelRatio||1; canvas.width = Math.floor(rect.width*scale); canvas.height = Math.floor(rect.height*scale); canvas.style.height = rect.height+'px'; ctx.scale(scale,scale); redrawFromStorage(); }
-    window.addEventListener('resize', ()=>{ resizeCanvas(); }); resizeCanvas();
-
-    document.getElementById('color').addEventListener('input', e=> ctx.strokeStyle = e.target.value);
-    document.getElementById('size').addEventListener('input', e=> ctx.lineWidth = e.target.value);
-    ctx.lineWidth = 6; ctx.lineCap='round'; ctx.strokeStyle = '#7c3aed';
-
-    function pointerPos(ev){ const rect = canvas.getBoundingClientRect(); return {x: ev.clientX - rect.left, y: ev.clientY - rect.top}; }
-    canvas.addEventListener('pointerdown', e=>{ drawing=true; last=pointerPos(e); });
-    canvas.addEventListener('pointermove', e=>{ if(!drawing) return; const p = pointerPos(e); ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(p.x,p.y); ctx.stroke(); last = p; });
-    canvas.addEventListener('pointerup', ()=>{ drawing=false; saveCanvas(); });
-    document.getElementById('clear').addEventListener('click', ()=>{ ctx.clearRect(0,0,canvas.width,canvas.height); saveCanvas();});
-    document.getElementById('save').addEventListener('click', ()=>{ const link = document.createElement('a'); link.download='dibujo.png'; link.href = canvas.toDataURL(); link.click(); });
-
-    function saveCanvas(){ try{ localStorage.setItem('drawing', canvas.toDataURL()); }catch(e){}
-    }
-    function redrawFromStorage(){ const data = localStorage.getItem('drawing'); if(!data) return; const img = new Image(); img.onload = ()=>{ ctx.clearRect(0,0,canvas.width,canvas.height); ctx.drawImage(img,0,0,canvas.width/canvas.getContext('2d').canvas.clientWidth*img.width,canvas.height);}; img.src = data; }
-
-    // --- Todo list with drag reorder ---
-    const todoList = document.getElementById('todoList');
-    const newItem = document.getElementById('newItem');
-    function renderTodos(){ todoList.innerHTML=''; const arr = JSON.parse(localStorage.getItem('todos')||'[]'); arr.forEach((t,i)=>{
-      const el = document.createElement('div'); el.className='draggable'; el.draggable=true; el.textContent = t;
-      el.addEventListener('dragstart', e=>{ e.dataTransfer.setData('text/plain', i); el.style.opacity=0.4; });
-      el.addEventListener('dragend', ()=> el.style.opacity='');
-      el.addEventListener('dragover', e=> e.preventDefault());
-      el.addEventListener('drop', e=>{ const from = parseInt(e.dataTransfer.getData('text/plain')); const to = i; reorder(from,to); });
-      todoList.appendChild(el);
-    }); }
-    function reorder(from,to){ const arr = JSON.parse(localStorage.getItem('todos')||'[]'); const [item] = arr.splice(from,1); arr.splice(to,0,item); localStorage.setItem('todos', JSON.stringify(arr)); renderTodos(); }
-    document.getElementById('addItem').addEventListener('click', ()=>{ const v = newItem.value.trim(); if(!v) return; const arr = JSON.parse(localStorage.getItem('todos')||'[]'); arr.push(v); localStorage.setItem('todos', JSON.stringify(arr)); newItem.value=''; renderTodos(); });
-    renderTodos();
-
-    // --- Simple confetti ---
-    function confettiBurst(){ const n=30; for(let i=0;i<n;i++){ const p = document.createElement('div'); p.style.position='fixed'; p.style.left = (50 + (Math.random()-0.5)*60)+'%'; p.style.top = '30%'; p.style.width='10px'; p.style.height='14px'; p.style.background = ['#f97316','#fb7185','#60a5fa','#7c3aed'][Math.floor(Math.random()*4)]; p.style.transform = 'rotate('+Math.random()*360+'deg)'; p.style.borderRadius='2px'; p.style.zIndex=9999; document.body.appendChild(p); const dx = (Math.random()-0.5)*800; const dy = 600 + Math.random()*200; p.animate([{transform:'translate(0,0) rotate(0deg)', opacity:1},{transform:'translate('+dx+'px,'+dy+'px) rotate(720deg)', opacity:0}],{duration:1500+Math.random()*800,easing:'cubic-bezier(.2,.7,.2,1)'}).onfinish = ()=>p.remove(); } }
-    document.getElementById('confetti').addEventListener('click', confettiBurst);
-
-    // --- Dragging helpers for the draggable blocks (simple) ---
-    document.querySelectorAll('.draggable').forEach(el=>{
-      el.addEventListener('dragstart', e=> e.dataTransfer.setData('text/plain', el.textContent));
-    });
-
-    // --- Keyboard shortcuts ---
-    document.addEventListener('keydown', e=>{
-      if(e.key.toLowerCase()==='t'){ setTheme(!document.body.classList.contains('light')); }
-      if(e.key.toLowerCase()==='g'){ startGame(); }
-      if(e.key.toLowerCase()==='d'){ const card = document.getElementById('drawCard'); card.scrollIntoView({behavior:'smooth'}); }
-    });
-
-    // Help panel simple
-    document.getElementById('helpBtn').addEventListener('click', ()=> alert('Atajos:\nT = Cambiar tema\nG = Iniciar juego\nD = Ir al lienzo\n\nGuarda tu dibujo con el botón "Descargar PNG".'));
-
-    // Load primary color into accent
-    document.documentElement.style.setProperty('--accent', document.getElementById('primary').value);
-
-    // small accessibility touches
-    document.querySelectorAll('button').forEach(b=> b.addEventListener('keyup', e=>{ if(e.key===' '||e.key==='Enter') b.click(); }));
-
-    // Prevent runaway intervals when leaving page
-    window.addEventListener('beforeunload', ()=> stopGame());
-
-    // Small initial animation
-    document.querySelectorAll('.card').forEach((c,i)=> c.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:450,delay:i*70,easing:'cubic-bezier(.2,.9,.3,1)'}));
+    // Chat Bot simple
+    const chatBox=document.getElementById('chatBox');
+    const chatInput=document.getElementById('chatInput');
+    const chatSend=document.getElementById('chatSend');
+    function botReply(msg){msg=msg.toLowerCase();if(msg.includes('hola'))return '¡Hola! ¿Cómo estás?';if(msg.includes('juego'))return 'Tenemos memoria y snake, ¿cuál prefieres?';return 'Interesante 🤔';}
+    function addMsg(text,cls){const d=document.createElement('div');d.className='msg '+cls;d.textContent=text;chatBox.appendChild(d);chatBox.scrollTop=chatBox.scrollHeight;}
+    chatSend.onclick=()=>{const v=chatInput.value.trim();if(!v)return;addMsg(v,'user');addMsg(botReply(v),'bot');chatInput.value='';};
+    chatInput.addEventListener('keydown',e=>{if(e.key==='Enter')chatSend.click();});
   </script>
 </body>
 </html>
