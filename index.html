@@ -1,522 +1,253 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Aretes Chulos — Catálogo & Diseñador</title>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg: #fbfbfd;
-    --card: #ffffff;
-    --muted:#7b7f88;
-    --accent1:#ff6ec7;
-    --accent2:#8a2be2;
-    --gold: #d4af37;
-    --glass: rgba(255,255,255,0.6);
-    --shadow: 0 10px 30px rgba(18,18,26,0.06);
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; font-family:Inter,system-ui,Arial; background:linear-gradient(180deg,var(--bg),#f4f6fa);
-    color:#111; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-  }
-  header{
-    position:sticky; top:0; background:var(--card); padding:.9rem 1rem; box-shadow:0 4px 18px rgba(0,0,0,0.04); z-index:20;
-  }
-  .wrap{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:16px}
-  #logo{width:60px;height:60px;border-radius:12px;object-fit:contain;border:1px solid #eee;background:#faf7fb;padding:6px}
-  .brand{flex:1}
-  h1{margin:0;font-size:1.15rem; background:linear-gradient(90deg,var(--accent2),var(--accent1)); -webkit-background-clip:text;color:transparent}
-  nav{display:flex;gap:8px;margin-top:6px}
-  nav a{font-weight:600;color:#444;text-decoration:none;padding:.4rem .6rem;border-radius:999px}
-  nav a:hover{background:#f4f4fb}
-  header .right{display:flex;gap:.6rem;align-items:center}
-  .btn{cursor:pointer;padding:.5rem .75rem;border-radius:10px;border:1px solid #eee;background:#fff;font-weight:700}
-  .btn.primary{background:linear-gradient(90deg,var(--accent2),var(--accent1));color:#fff;border-color:transparent;box-shadow:0 8px 24px rgba(138,43,226,0.08)}
-  main{max-width:1200px;margin:20px auto;display:grid;grid-template-columns:1fr 420px;gap:20px;padding:0 18px 80px}
-  /* Catalog */
-  .catalog{display:flex;flex-direction:column;gap:14px}
-  .catalog-head{display:flex;justify-content:space-between;align-items:center}
-  .catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
-  .card{background:var(--card);border-radius:14px;padding:10px;border:1px solid #f0f0f6;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px;transition:transform .18s, box-shadow .18s}
-  .card:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(18,18,26,0.12)}
-  .thumb{width:100%;height:220px;object-fit:cover;border-radius:10px;display:block;background:#faf7fb}
-  .card .meta{display:flex;justify-content:space-between;align-items:center}
-  .price{font-weight:800;color:var(--accent2)}
-  .card .info{font-size:.95rem;color:var(--muted)}
-  .card .actions{display:flex;gap:8px;align-items:center}
-  .small{padding:.3rem .45rem;border-radius:8px;font-weight:700}
-  /* Designer */
-  .designer{background:var(--card);border-radius:14px;padding:14px;border:1px solid #f0f0f6;box-shadow:var(--shadow);position:sticky;top:20px}
-  .designer h3{margin:.1rem 0}
-  .canvas-wrap{background:linear-gradient(180deg,#fff,#fbfbff);padding:10px;border-radius:12px;border:1px solid #eee}
-  canvas{width:100%;height:auto;border-radius:8px;display:block}
-  .controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
-  .control{display:flex;flex-direction:column;gap:6px}
-  select,input[type=color],input[type=range],input[type=number],input[type=text]{padding:.5rem;border-radius:10px;border:1px solid #ececf3;background:#fff}
-  .full{grid-column:1/-1}
-  .muted{color:var(--muted);font-size:.92rem}
-  footer{max-width:1200px;margin:30px auto;text-align:center;color:var(--muted);padding:40px 18px 80px}
-  .socials{display:flex;gap:10px;justify-content:center;margin-top:8px}
-  .socials a{display:inline-flex;align-items:center;gap:8px;padding:.5rem .7rem;border-radius:999px;background:#fff;border:1px solid #f0f0f6;box-shadow:0 6px 18px rgba(0,0,0,0.04);text-decoration:none;color:#333;font-weight:700}
-  @media(max-width:1080px){main{grid-template-columns:1fr;padding:0 14px} .designer{position:relative;top:auto}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ultra Interactiva — Demo</title>
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --accent:#7c3aed; --muted:#9aa4b2; --glass: rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,system-ui,Arial;color:#e6eef6;background:radial-gradient(1200px 600px at 10% 10%,rgba(124,58,237,0.12),transparent),var(--bg);}
+    .wrap{max-width:1100px;margin:28px auto;padding:22px;}
+    header{display:flex;gap:12px;align-items:center;justify-content:space-between}
+    h1{font-size:20px;margin:0}
+    .controls{display:flex;gap:8px;align-items:center}
+    button, .chip{background:var(--glass);border:0;padding:8px 12px;border-radius:10px;color:inherit;cursor:pointer}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);min-height:140px;position:relative}
+    .card h3{margin:0;margin-bottom:8px;font-size:14px}
+    .muted{color:var(--muted);font-size:13px}
+    .live-badge{position:absolute;right:12px;top:12px;padding:6px 8px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#2dd4bf);font-weight:600;font-size:12px}
+
+    /* Game bubbles */
+    #game{display:flex;flex-direction:column;height:320px;align-items:center;justify-content:center;overflow:hidden}
+    #playfield{width:100%;height:100%;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:8px;position:relative}
+    .bubble{position:absolute;border-radius:999px;padding:10px 14px;background:var(--accent);color:#051226;font-weight:700;user-select:none;cursor:pointer}
+
+    /* Drawing canvas */
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    input[type=range]{width:110px}
+
+    /* Draggable list */
+    .list{display:flex;flex-direction:column;gap:8px}
+    .draggable{padding:10px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);cursor:grab}
+    .draggable:active{cursor:grabbing}
+
+    footer{margin-top:22px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* Responsive */
+    @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)} }
+    @media(max-width:640px){.grid{grid-template-columns:1fr}}
+
+    /* Light theme */
+    .light{--bg:#eef2ff;--card:#ffffff;--accent:#6d28d9;--muted:#475569;color:#071022}
+  </style>
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <img id="logoPreview" src="" alt="logo"/>
-    <div class="brand">
-      <h1>Aretes Chulos</h1>
-      <nav><a href="#catalog">Catálogo</a><a href="#designer">Diseñador</a></nav>
-    </div>
-    <div class="right">
-      <label for="logoFile" class="btn">Subir logo</label>
-      <input id="logoFile" type="file" accept="image/*" style="display:none" />
-      <button id="openCatalogUpload" class="btn">+ Subir producto</button>
-    </div>
-  </div>
-</header>
-
-<main>
-  <!-- CATALOGO -->
-  <section class="catalog" id="catalog">
-    <div class="catalog-head">
+  <div class="wrap" id="app">
+    <header>
       <div>
-        <h2 style="margin:0">Catálogo</h2>
-        <div class="muted">Tus productos a la venta — pulsa <em>WhatsApp</em> para comprar.</div>
+        <h1>Ultra Interactiva — Demo</h1>
+        <div class="muted">Una página con mini-juegos, lienzo, arrastrar, tema y accesos rápidos</div>
       </div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <input id="search" placeholder="Buscar producto..." style="padding:.5rem;border-radius:10px;border:1px solid #eee" />
-        <button id="clearCatalog" class="btn">Vaciar</button>
+      <div class="controls">
+        <button id="themeBtn" title="Cambiar tema">🌗 Tema (T)</button>
+        <button id="gameBtn" title="Iniciar juego">🎯 Juego (G)</button>
+        <button id="drawBtn" title="Activar lienzo">✏️ Lienzo (D)</button>
+        <div class="chip" id="helpBtn">❓ Atajos</div>
       </div>
+    </header>
+
+    <div class="grid">
+      <div class="card" id="gameCard">
+        <div class="live-badge">Mini-juego</div>
+        <h3>Pop Bubbles</h3>
+        <div class="muted">Haz click en las burbujas rápido para sumar puntos.</div>
+        <div id="game" style="margin-top:10px">
+          <div id="playfield"></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
+          <div class="muted">Puntaje:</div><div id="score">0</div>
+          <button id="restart" style="margin-left:auto">Reiniciar</button>
+        </div>
+      </div>
+
+      <div class="card" id="drawCard">
+        <h3>Canvas — Dibuja y descarga</h3>
+        <div class="muted">Herramientas básicas, cambia grosor y color. Presiona 'D' para alternar.</div>
+        <div class="toolbar">
+          <label class="muted">Color <input type="color" id="color" value="#7c3aed"></label>
+          <label class="muted">Grosor <input type="range" id="size" min="1" max="40" value="6"></label>
+          <button id="clear">Limpiar</button>
+          <button id="save">Descargar PNG</button>
+        </div>
+        <canvas id="canvas" width="600" height="220" style="display:block;margin-top:8px;border-radius:8px;width:100%;background:linear-gradient(90deg,rgba(255,255,255,0.02),transparent);"></canvas>
+      </div>
+
+      <div class="card" id="todoCard">
+        <h3>Lista interactiva (arrastrable)</h3>
+        <div class="muted">Arrastra para reordenar — los cambios se guardan localmente.</div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <input id="newItem" placeholder="Agregar tarea..." style="flex:1;padding:8px;border-radius:8px;border:0;background:var(--glass)">
+          <button id="addItem">Añadir</button>
+        </div>
+        <div class="list" id="todoList" style="margin-top:10px"></div>
+      </div>
+
+      <div class="card" id="dragCard">
+        <h3>Explora — Elementos arrastrables</h3>
+        <div class="muted">Arrastra los bloques por la tarjeta.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+          <div class="draggable" draggable="true">🔵 Bloque A</div>
+          <div class="draggable" draggable="true">🟢 Bloque B</div>
+          <div class="draggable" draggable="true">🟠 Bloque C</div>
+        </div>
+      </div>
+
+      <div class="card" id="controlsCard">
+        <h3>Personaliza</h3>
+        <div class="muted">Cambia colores principales y genera confetti.</div>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+          <label class="muted">Color principal <input id="primary" type="color" value="#7c3aed"></label>
+          <button id="confetti">🎉 Confetti</button>
+        </div>
+        <div style="margin-top:10px" class="muted">Prueba atajos: T tema — G juego — D lienzo</div>
+      </div>
+
+      <div class="card" id="infoCard">
+        <h3>Accesos rápidos y tips</h3>
+        <div class="muted">Usa el teclado para alternar módulos o guarda tu dibujo cuando termines.</div>
+        <ul>
+          <li class="muted">T = Tema</li>
+          <li class="muted">G = Empezar juego</li>
+          <li class="muted">D = Lienzo</li>
+        </ul>
+      </div>
+
     </div>
 
-    <div class="catalog-grid" id="catalogGrid"></div>
-  </section>
-
-  <!-- DISEÑADOR -->
-  <aside class="designer" id="designer">
-    <h3>🎨 Diseñador — crea tu arete</h3>
-    <div class="muted">Hasta 3 piezas. Cada pieza puede tener color y borde distintos. Agrega tu diseño al catálogo.</div>
-
-    <div style="margin-top:12px" class="canvas-wrap">
-      <canvas id="canvas" width="520" height="680" aria-label="Vista previa del arete"></canvas>
-    </div>
-
-    <div class="controls" style="margin-top:12px">
-      <div class="control">
-        <label>Piezas</label>
-        <select id="pieces"><option>1</option><option>2</option><option>3</option></select>
-      </div>
-
-      <div class="control">
-        <label>Molde</label>
-        <select id="shape">
-          <option value="circle">Círculo</option>
-          <option value="square">Cuadrado</option>
-          <option value="triangle">Triángulo</option>
-          <option value="star">Estrella</option>
-          <option value="heart">Corazón</option>
-          <option value="teardrop">Gota</option>
-          <option value="hex">Hexágono</option>
-          <option value="flower">Flor</option>
-          <option value="diamond">Diamante</option>
-          <option value="oval">Óvalo</option>
-          <option value="moon">Luna</option>
-          <option value="sun">Sol</option>
-          <option value="cloud">Nube</option>
-        </select>
-      </div>
-
-      <div class="control">
-        <label>Patrón</label>
-        <select id="pattern"><option value="none">Liso</option><option value="stripes">Rayas</option><option value="dots">Puntos</option><option value="cheq">Cuadros</option></select>
-      </div>
-
-      <div class="control">
-        <label>Gradiente</label>
-        <select id="gradient"><option value="none">Ninguno</option><option value="vertical">Vertical</option><option value="radial">Radial</option></select>
-      </div>
-
-      <div class="control full">
-        <label>Tamaño base (px)</label>
-        <input id="size" type="range" min="60" max="280" value="140">
-      </div>
-
-      <div class="control">
-        <label>Separación (px)</label>
-        <input id="gap" type="range" min="6" max="80" value="22">
-      </div>
-
-      <div class="control">
-        <label>Grosor borde</label>
-        <input id="strokeW" type="range" min="0" max="18" value="6">
-      </div>
-
-      <!-- Per-piece colors -->
-      <div class="control">
-        <label>Pieza 1 — Relleno</label>
-        <input id="fill1" type="color" value="#ff6ec7">
-      </div>
-      <div class="control">
-        <label>Pieza 1 — Borde</label>
-        <input id="stroke1" type="color" value="#8a2be2">
-      </div>
-
-      <div class="control">
-        <label>Pieza 2 — Relleno</label>
-        <input id="fill2" type="color" value="#ffd66b">
-      </div>
-      <div class="control">
-        <label>Pieza 2 — Borde</label>
-        <input id="stroke2" type="color" value="#d4af37">
-      </div>
-
-      <div class="control">
-        <label>Pieza 3 — Relleno</label>
-        <input id="fill3" type="color" value="#8be6c1">
-      </div>
-      <div class="control">
-        <label>Pieza 3 — Borde</label>
-        <input id="stroke3" type="color" value="#0b9a83">
-      </div>
-
-      <div class="control full">
-        <label>Fondo vista previa</label>
-        <input id="bg" type="color" value="#ffffff">
-      </div>
-
-      <div style="display:flex;gap:8px" class="full">
-        <button id="download" class="btn primary">📥 Descargar PNG</button>
-        <button id="addDesign" class="btn">➕ Agregar al catálogo</button>
-      </div>
-
-      <div class="full muted" style="margin-top:8px">Nota: las imágenes del catálogo y los diseños se guardan localmente en tu navegador. Para ventas reales conecta un backend.</div>
-    </div>
-  </aside>
-</main>
-
-<footer>
-  <div>© Aretes Chulos · Hecho con ❤️</div>
-  <div class="socials">
-    <a id="waFooter" href="#" target="_blank">WhatsApp</a>
-    <a href="#" target="_blank">Instagram</a>
-    <a href="#" target="_blank">TikTok</a>
+    <footer>Hecho con ❤️ — Prueba, modifica y copia lo que quieras.</footer>
   </div>
-</footer>
 
-<!-- hidden file input for products -->
-<input id="productFiles" type="file" accept="image/*" multiple style="display:none" />
+  <script>
+    // --- Theme toggle ---
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+    function setTheme(light){
+      document.body.classList.toggle('light', !!light);
+      localStorage.setItem('ui_light', !!light);
+    }
+    themeBtn.addEventListener('click', ()=> setTheme(!document.body.classList.contains('light')));
+    setTheme(localStorage.getItem('ui_light')==='true');
 
-<script>
-/* ================= CONFIG ================= */
-// WhatsApp number (sin símbolo +). Ya con country code MX.
-const WA_NUMBER = '528113683092'; // +52 811 368 3092
+    // Primary color live change
+    document.getElementById('primary').addEventListener('input', e=>{
+      document.documentElement.style.setProperty('--accent', e.target.value);
+      document.getElementById('color').value = e.target.value;
+    });
 
-/* ================ HELPERS ================ */
-const $ = s => document.querySelector(s);
-const $$ = s => Array.from(document.querySelectorAll(s));
+    // --- Game: pop bubbles ---
+    const playfield = document.getElementById('playfield');
+    const scoreEl = document.getElementById('score');
+    let score = 0, gameInterval, bubbles = [];
+    function spawnBubble(){
+      const b = document.createElement('div');
+      b.className='bubble';
+      const size = 36 + Math.random()*64;
+      b.style.width = b.style.height = size+'px';
+      b.style.left = (Math.random()*80)+'%';
+      b.style.top = (Math.random()*80)+'%';
+      b.textContent = Math.floor(1+Math.random()*9);
+      playfield.appendChild(b);
 
-/* ============ CATALOG (localStorage) ============ */
-let products = JSON.parse(localStorage.getItem('ac_products') || 'null') || [
-  // sample starter items (puedes reemplazarlas)
-  {id:1,name:'Arete Luna',price:120,img:'https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=900&q=80'},
-  {id:2,name:'Arete Corazón',price:140,img:'https://images.unsplash.com/photo-1520975915642-3b87e9b2aa9b?w=900&q=80'},
-  {id:3,name:'Arete Estrella',price:160,img:'https://images.unsplash.com/photo-1519143939365-0b7c9b4c2f43?w=900&q=80'}
-];
+      b.addEventListener('click', e=>{ score += parseInt(b.textContent); scoreEl.textContent = score; popEffect(b); });
+      bubbles.push(b);
+      // auto-remove after 5s
+      setTimeout(()=>{ if(b.parentElement) b.remove(); },5200);
+    }
+    function startGame(){ stopGame(); score=0;scoreEl.textContent=score; gameInterval = setInterval(spawnBubble,500); }
+    function stopGame(){ clearInterval(gameInterval); bubbles.forEach(b=>b.remove()); bubbles=[]; }
+    document.getElementById('gameBtn').addEventListener('click', ()=> startGame());
+    document.getElementById('restart').addEventListener('click', ()=> startGame());
 
-function saveProducts(){ localStorage.setItem('ac_products', JSON.stringify(products)); }
-function renderCatalog(filter=''){
-  const grid = $('#catalogGrid'); grid.innerHTML='';
-  const list = products.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
-  if(!list.length){
-    grid.innerHTML = '<div style="grid-column:1/-1;padding:24px;background:linear-gradient(90deg,#fff,#fbfbff);border-radius:12px;border:1px dashed #eee;text-align:center;color:var(--muted)">No hay productos. Sube imágenes o crea diseños.</div>';
-    return;
-  }
-  list.forEach(p=>{
-    const div = document.createElement('div'); div.className='card';
-    div.innerHTML = `
-      <img class="thumb" src="${p.img}" alt="${escapeHtml(p.name)}">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div>
-          <div style="font-weight:800">${escapeHtml(p.name)}</div>
-          <div class="info muted">ID: ${p.id}</div>
-        </div>
-        <div style="text-align:right">
-          <div class="price">$ ${p.price}</div>
-          <div style="display:flex;gap:8px;margin-top:6px">
-            <button class="small" data-act="fav" data-id="${p.id}">❤️</button>
-            <button class="small primary" data-act="buy" data-id="${p.id}">WhatsApp</button>
-          </div>
-        </div>
-      </div>
-    `;
-    grid.appendChild(div);
-  });
-}
-function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[m])); }
-renderCatalog();
-
-/* ===== product upload button ===== */
-$('#openCatalogUpload').addEventListener('click', ()=> $('#productFiles').click());
-$('#productFiles').addEventListener('change', (e)=>{
-  const files = Array.from(e.target.files||[]);
-  if(!files.length) return;
-  files.forEach(f=>{
-    const r = new FileReader();
-    r.onload = ev => {
-      const id = Date.now() + Math.floor(Math.random()*99);
-      products.unshift({id,name:`Producto ${id}`,price:120,img:ev.target.result});
-      saveProducts(); renderCatalog($('#search').value || '');
-    };
-    r.readAsDataURL(f);
-  });
-  e.target.value='';
-});
-
-/* product actions (whatsapp/buy) */
-$('#catalogGrid').addEventListener('click', e=>{
-  const btn = e.target.closest('button'); if(!btn) return;
-  const act = btn.dataset.act, id = btn.dataset.id;
-  const prod = products.find(x=>String(x.id)===String(id)); if(!prod) return;
-  if(act==='fav'){ alert('Guardado en favoritos (simulado): ' + prod.name); }
-  if(act==='buy'){
-    const text = encodeURIComponent(`Hola, estoy interesado en *${prod.name}* (ID ${prod.id}). ¿Está disponible?`);
-    const url = WA_NUMBER ? `https://wa.me/${WA_NUMBER}?text=${text}` : `https://wa.me/?text=${text}`;
-    window.open(url,'_blank');
-  }
-});
-
-/* clear catalog */
-$('#clearCatalog').addEventListener('click', ()=>{
-  if(confirm('¿Vaciar todo el catálogo? Esto lo eliminará localmente.')){ products=[]; saveProducts(); renderCatalog(); }
-});
-
-/* search */
-$('#search').addEventListener('input', e => renderCatalog(e.target.value));
-
-/* logo upload */
-$('#logoFile').addEventListener('change', e=>{
-  const f = e.target.files[0]; if(!f) return;
-  const r = new FileReader(); r.onload = ev => $('#logoPreview').src = ev.target.result; r.readAsDataURL(f);
-});
-
-/* ============ DESIGNER ============ */
-const canvas = $('#canvas');
-const ctx = canvas.getContext('2d', {alpha:false});
-const DPR = window.devicePixelRatio || 1;
-function fixCanvasSize(){
-  // keep 520x680 logical size but scale for DPR
-  const rect = canvas.getBoundingClientRect();
-  canvas.width = 520 * DPR;
-  canvas.height = 680 * DPR;
-  canvas.style.width = rect.width + 'px';
-  canvas.style.height = (rect.width * 680/520) + 'px';
-  ctx.setTransform(DPR,0,0,DPR,0,0);
-}
-fixCanvasSize();
-window.addEventListener('resize', ()=>{ fixCanvasSize(); draw(); });
-
-const controls = {
-  pieces: $('#pieces'), shape: $('#shape'), pattern: $('#pattern'), gradient: $('#gradient'),
-  size: $('#size'), gap: $('#gap'), strokeW: $('#strokeW'), bg: $('#bg'),
-  fill1: $('#fill1'), stroke1: $('#stroke1'), fill2: $('#fill2'), stroke2: $('#stroke2'),
-  fill3: $('#fill3'), stroke3: $('#stroke3')
-};
-
-Object.values(controls).forEach(c=>c.addEventListener('input', draw));
-
-/* shape drawing helpers (many molds) */
-function roundRect(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
-function drawShape(shape,cx,cy,r){
-  ctx.beginPath();
-  if(shape==='circle'){ ctx.arc(cx,cy,r,0,Math.PI*2); }
-  else if(shape==='square'){ roundRect(ctx, cx-r, cy-r, r*2, r*2, Math.min(18,r*0.35)); }
-  else if(shape==='triangle'){ ctx.moveTo(cx,cy-r); ctx.lineTo(cx-r,cy+r); ctx.lineTo(cx+r,cy+r); ctx.closePath(); }
-  else if(shape==='star'){ const spikes=5, outer=r, inner=r*0.45; let rot=Math.PI/2*3; for(let i=0;i<spikes;i++){ let x = cx + Math.cos(rot)*outer, y = cy + Math.sin(rot)*outer; ctx.lineTo(x,y); rot+=Math.PI/spikes; x = cx + Math.cos(rot)*inner; y = cy + Math.sin(rot)*inner; ctx.lineTo(x,y); rot+=Math.PI/spikes; } ctx.closePath(); }
-  else if(shape==='heart'){ const k=r*0.7; ctx.moveTo(cx, cy + k*0.9); ctx.bezierCurveTo(cx - k*1.6, cy - k*0.3, cx - k*0.6, cy - k*1.3, cx, cy - k*0.4); ctx.bezierCurveTo(cx + k*0.6, cy - k*1.3, cx + k*1.6, cy - k*0.3, cx, cy + k*0.9); }
-  else if(shape==='teardrop'){ ctx.moveTo(cx,cy-r); ctx.bezierCurveTo(cx+r*1.0,cy-r*0.2,cx+r*0.6,cy+r*1.0,cx,cy+r*1.1); ctx.bezierCurveTo(cx-r*0.6,cy+r*1.0,cx-r*1.0,cy-r*0.2,cx,cy-r); }
-  else if(shape==='hex'){ for(let i=0;i<6;i++){ let a = Math.PI/3*i - Math.PI/6; let x = cx + Math.cos(a)*r; let y = cy + Math.sin(a)*r; if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); } ctx.closePath(); }
-  else if(shape==='flower'){ for(let i=0;i<8;i++){ let a=i*(Math.PI*2/8); let x=cx+Math.cos(a)*(r*0.9); let y=cy+Math.sin(a)*(r*0.9); ctx.moveTo(cx,cy); ctx.quadraticCurveTo((cx+x)/2,(cy+y)/2,x,y); } }
-  else if(shape==='diamond'){ ctx.moveTo(cx,cy-r); ctx.lineTo(cx+r,cy); ctx.lineTo(cx,cy+r); ctx.lineTo(cx-r,cy); ctx.closePath(); }
-  else if(shape==='oval'){ ctx.save(); ctx.translate(cx,cy); ctx.scale(1.35,1); ctx.arc(0,0,r,0,Math.PI*2); ctx.restore(); }
-  else if(shape==='moon'){ ctx.arc(cx,cy,r,0.5*Math.PI,1.5*Math.PI); ctx.arc(cx+ r*0.4, cy, r*0.9, 1.5*Math.PI, 0.5*Math.PI, true); ctx.closePath(); }
-  else if(shape==='sun'){ for(let i=0;i<12;i++){ let a=i*(Math.PI*2/12); let x1=cx+Math.cos(a)*(r*0.9); let y1=cy+Math.sin(a)*(r*0.9); let x2=cx+Math.cos(a)*(r*1.3); let y2=cy+Math.sin(a)*(r*1.3); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); } ctx.arc(cx,cy,r*0.75,0,Math.PI*2); }
-  else if(shape==='cloud'){ ctx.moveTo(cx-r*0.8,cy); ctx.bezierCurveTo(cx-r*1.05,cy-r*0.5,cx-r*0.3,cy-r*0.8,cx-r*0.1,cy-r*0.5); ctx.bezierCurveTo(cx+0.1,cy-r*1.05,cx+0.9,cy-r*0.6,cx+0.6,cy); ctx.closePath(); }
-  else ctx.arc(cx,cy,r,0,Math.PI*2);
-}
-
-/* patterns */
-function patternFill(type,bbox){
-  if(type==='none') return;
-  ctx.save();
-  ctx.clip();
-  ctx.globalAlpha = 0.28;
-  ctx.lineWidth = 3;
-  ctx.strokeStyle = '#000';
-  if(type==='stripes'){
-    const step = 18; for(let x=bbox.x - bbox.h; x<bbox.x + bbox.h; x+=step){ ctx.beginPath(); ctx.moveTo(x, bbox.y-bbox.h); ctx.lineTo(x + bbox.h*2, bbox.y + bbox.h); ctx.stroke(); }
-  } else if(type==='dots'){
-    const step = 20; for(let y=bbox.y - bbox.h; y<bbox.y + bbox.h; y+=step){ for(let x=bbox.x - bbox.h; x<bbox.x + bbox.h; x+=step){ ctx.beginPath(); ctx.arc(x,y,3,0,Math.PI*2); ctx.fillStyle='#000'; ctx.fill(); } }
-  } else if(type==='cheq'){
-    const s=18; for(let y=bbox.y-bbox.h;y<bbox.y+bbox.h;y+=s){ for(let x=bbox.x-bbox.h;x<bbox.x+bbox.h;x+=s){ ctx.fillStyle = ((x+y)/s)%2>0? '#fff':'#000'; ctx.fillRect(x,y,s,s); } }
-  }
-  ctx.restore();
-}
-
-/* hook & chain */
-function drawHook(cx, topY){
-  ctx.save();
-  ctx.strokeStyle = '#9a8f86';
-  ctx.lineWidth = 6;
-  ctx.lineCap='round';
-  ctx.beginPath(); ctx.moveTo(cx, topY); ctx.quadraticCurveTo(cx+18, topY+26, cx, topY+48); ctx.stroke();
-  ctx.beginPath(); ctx.lineWidth = 5; ctx.arc(cx, topY+58, 11, 0, Math.PI*2); ctx.stroke();
-  ctx.restore();
-}
-
-/* lighten for gradient */
-function lighten(hex, amt){
-  const c = hex.replace('#',''); const n=parseInt(c,16);
-  let r=(n>>16)+Math.round(255*amt), g=((n>>8)&255)+Math.round(255*amt), b=(n&255)+Math.round(255*amt);
-  r=Math.min(255,r); g=Math.min(255,g); b=Math.min(255,b);
-  return '#'+((r<<16)|(g<<8)|b).toString(16).padStart(6,'0');
-}
-
-/* main draw */
-function draw(){
-  // background
-  ctx.fillStyle = controls.bg.value || '#fff'; ctx.fillRect(0,0,canvas.width/DPR,canvas.height/DPR);
-
-  const W = canvas.width/DPR, H = canvas.height/DPR;
-  const cx = W/2;
-  const pieces = parseInt(controls.pieces.value);
-  const sizeBase = parseInt(controls.size.value);
-  const gap = parseInt(controls.gap.value);
-  const strokeW = parseInt(controls.strokeW.value);
-  const shape = controls.shape.value;
-  const pattern = controls.pattern.value;
-  const gradType = controls.gradient.value;
-
-  // draw hook
-  drawHook(cx, 48);
-
-  // compute start to center whole composition
-  const totalH = pieces * sizeBase + (pieces-1)*gap;
-  const startY = Math.max(120, (H - totalH)/2);
-
-  for(let i=0;i<pieces;i++){
-    const r = sizeBase/2;
-    const y = startY + i*(sizeBase+gap) + r;
-
-    ctx.save();
-    // shape path
-    drawShape(shape, cx, y, r);
-
-    // fill: gradient or solid, per piece color selection
-    const fillColor = i===0? controls.fill1.value : i===1? controls.fill2.value : controls.fill3.value;
-    const strokeColor = i===0? controls.stroke1.value : i===1? controls.stroke2.value : controls.stroke3.value;
-
-    if(gradType==='none'){
-      ctx.fillStyle = fillColor; ctx.fill();
-    } else if(gradType==='vertical'){
-      const g = ctx.createLinearGradient(cx, y - r, cx, y + r);
-      g.addColorStop(0, lighten(fillColor, 0.12)); g.addColorStop(1, fillColor);
-      ctx.fillStyle = g; ctx.fill();
-    } else if(gradType==='radial'){
-      const g = ctx.createRadialGradient(cx - r*0.3, y - r*0.3, r*0.2, cx, y, r*1.2);
-      g.addColorStop(0, lighten(fillColor, 0.14)); g.addColorStop(1, fillColor);
-      ctx.fillStyle = g; ctx.fill();
+    function popEffect(el){
+      const r = el.getBoundingClientRect();
+      const pop = document.createElement('div');
+      pop.style.position='absolute'; pop.style.left = (el.offsetLeft+el.offsetWidth/2-20)+'px'; pop.style.top = (el.offsetTop+el.offsetHeight/2-20)+'px';
+      pop.style.width=pop.style.height='40px'; pop.style.borderRadius='50%'; pop.style.background='radial-gradient(circle,#fff4,#fff0)'; pop.style.opacity=0.95; playfield.appendChild(pop);
+      el.remove(); setTimeout(()=>pop.remove(),350);
     }
 
-    // pattern
-    const bbox = {x:cx, y:y, h:r*1.1};
-    patternFill(pattern, bbox);
+    // --- Canvas drawing ---
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let drawing=false, last = null;
+    function resizeCanvas(){ const rect = canvas.getBoundingClientRect(); const scale = devicePixelRatio||1; canvas.width = Math.floor(rect.width*scale); canvas.height = Math.floor(rect.height*scale); canvas.style.height = rect.height+'px'; ctx.scale(scale,scale); redrawFromStorage(); }
+    window.addEventListener('resize', ()=>{ resizeCanvas(); }); resizeCanvas();
 
-    // stroke
-    if(strokeW>0){
-      ctx.strokeStyle = strokeColor; ctx.lineWidth = strokeW; ctx.stroke();
+    document.getElementById('color').addEventListener('input', e=> ctx.strokeStyle = e.target.value);
+    document.getElementById('size').addEventListener('input', e=> ctx.lineWidth = e.target.value);
+    ctx.lineWidth = 6; ctx.lineCap='round'; ctx.strokeStyle = '#7c3aed';
+
+    function pointerPos(ev){ const rect = canvas.getBoundingClientRect(); return {x: ev.clientX - rect.left, y: ev.clientY - rect.top}; }
+    canvas.addEventListener('pointerdown', e=>{ drawing=true; last=pointerPos(e); });
+    canvas.addEventListener('pointermove', e=>{ if(!drawing) return; const p = pointerPos(e); ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(p.x,p.y); ctx.stroke(); last = p; });
+    canvas.addEventListener('pointerup', ()=>{ drawing=false; saveCanvas(); });
+    document.getElementById('clear').addEventListener('click', ()=>{ ctx.clearRect(0,0,canvas.width,canvas.height); saveCanvas();});
+    document.getElementById('save').addEventListener('click', ()=>{ const link = document.createElement('a'); link.download='dibujo.png'; link.href = canvas.toDataURL(); link.click(); });
+
+    function saveCanvas(){ try{ localStorage.setItem('drawing', canvas.toDataURL()); }catch(e){}
     }
+    function redrawFromStorage(){ const data = localStorage.getItem('drawing'); if(!data) return; const img = new Image(); img.onload = ()=>{ ctx.clearRect(0,0,canvas.width,canvas.height); ctx.drawImage(img,0,0,canvas.width/canvas.getContext('2d').canvas.clientWidth*img.width,canvas.height);}; img.src = data; }
 
-    ctx.restore();
+    // --- Todo list with drag reorder ---
+    const todoList = document.getElementById('todoList');
+    const newItem = document.getElementById('newItem');
+    function renderTodos(){ todoList.innerHTML=''; const arr = JSON.parse(localStorage.getItem('todos')||'[]'); arr.forEach((t,i)=>{
+      const el = document.createElement('div'); el.className='draggable'; el.draggable=true; el.textContent = t;
+      el.addEventListener('dragstart', e=>{ e.dataTransfer.setData('text/plain', i); el.style.opacity=0.4; });
+      el.addEventListener('dragend', ()=> el.style.opacity='');
+      el.addEventListener('dragover', e=> e.preventDefault());
+      el.addEventListener('drop', e=>{ const from = parseInt(e.dataTransfer.getData('text/plain')); const to = i; reorder(from,to); });
+      todoList.appendChild(el);
+    }); }
+    function reorder(from,to){ const arr = JSON.parse(localStorage.getItem('todos')||'[]'); const [item] = arr.splice(from,1); arr.splice(to,0,item); localStorage.setItem('todos', JSON.stringify(arr)); renderTodos(); }
+    document.getElementById('addItem').addEventListener('click', ()=>{ const v = newItem.value.trim(); if(!v) return; const arr = JSON.parse(localStorage.getItem('todos')||'[]'); arr.push(v); localStorage.setItem('todos', JSON.stringify(arr)); newItem.value=''; renderTodos(); });
+    renderTodos();
 
-    // draw chain to next piece
-    if(i < pieces-1){
-      ctx.beginPath(); ctx.strokeStyle='#d8d8dc'; ctx.lineWidth = 2;
-      ctx.moveTo(cx, y + r - 6); ctx.lineTo(cx, y + r + gap - 6); ctx.stroke();
-    }
-  }
-}
+    // --- Simple confetti ---
+    function confettiBurst(){ const n=30; for(let i=0;i<n;i++){ const p = document.createElement('div'); p.style.position='fixed'; p.style.left = (50 + (Math.random()-0.5)*60)+'%'; p.style.top = '30%'; p.style.width='10px'; p.style.height='14px'; p.style.background = ['#f97316','#fb7185','#60a5fa','#7c3aed'][Math.floor(Math.random()*4)]; p.style.transform = 'rotate('+Math.random()*360+'deg)'; p.style.borderRadius='2px'; p.style.zIndex=9999; document.body.appendChild(p); const dx = (Math.random()-0.5)*800; const dy = 600 + Math.random()*200; p.animate([{transform:'translate(0,0) rotate(0deg)', opacity:1},{transform:'translate('+dx+'px,'+dy+'px) rotate(720deg)', opacity:0}],{duration:1500+Math.random()*800,easing:'cubic-bezier(.2,.7,.2,1)'}).onfinish = ()=>p.remove(); } }
+    document.getElementById('confetti').addEventListener('click', confettiBurst);
 
-/* set up events */
-draw();
-Object.values(controls).forEach(c=>c.addEventListener('input', draw));
+    // --- Dragging helpers for the draggable blocks (simple) ---
+    document.querySelectorAll('.draggable').forEach(el=>{
+      el.addEventListener('dragstart', e=> e.dataTransfer.setData('text/plain', el.textContent));
+    });
 
-/* download PNG */
-$('#download').addEventListener('click', ()=>{
-  // create high-res export
-  const exportCanvas = document.createElement('canvas');
-  const scale = 2; exportCanvas.width = canvas.width * scale / DPR; exportCanvas.height = canvas.height * scale / DPR;
-  const exCtx = exportCanvas.getContext('2d');
-  // draw background
-  exCtx.fillStyle = controls.bg.value; exCtx.fillRect(0,0,exportCanvas.width,exportCanvas.height);
-  // ... simplify: draw current canvas scaled
-  exCtx.drawImage(canvas, 0,0, exportCanvas.width, exportCanvas.height);
-  const link = document.createElement('a'); link.download = 'arete-chulos.png'; link.href = exportCanvas.toDataURL('image/png'); link.click();
-});
+    // --- Keyboard shortcuts ---
+    document.addEventListener('keydown', e=>{
+      if(e.key.toLowerCase()==='t'){ setTheme(!document.body.classList.contains('light')); }
+      if(e.key.toLowerCase()==='g'){ startGame(); }
+      if(e.key.toLowerCase()==='d'){ const card = document.getElementById('drawCard'); card.scrollIntoView({behavior:'smooth'}); }
+    });
 
-/* add design to catalog: ask name + price */
-$('#addDesign').addEventListener('click', ()=>{
-  const name = prompt('Nombre para este diseño (ej: Arete Rosa):', 'Diseño '+(Date.now()%10000));
-  if(name===null) return;
-  let price = prompt('Precio (MXN) — deja 0 si es muestra:', '150');
-  if(price===null) return;
-  price = Number(price) || 0;
-  // get dataURL
-  const data = canvas.toDataURL('image/png');
-  const id = Date.now() + Math.floor(Math.random()*99);
-  products.unshift({id,name,price,img:data});
-  saveProducts(); renderCatalog($('#search').value || '');
-  alert('Diseño agregado al catálogo ✅');
-});
+    // Help panel simple
+    document.getElementById('helpBtn').addEventListener('click', ()=> alert('Atajos:\nT = Cambiar tema\nG = Iniciar juego\nD = Ir al lienzo\n\nGuarda tu dibujo con el botón "Descargar PNG".'));
 
-/* footer WA link */
-$('#waFooter').href = WA_NUMBER ? `https://wa.me/${WA_NUMBER}` : 'https://wa.me/';
+    // Load primary color into accent
+    document.documentElement.style.setProperty('--accent', document.getElementById('primary').value);
 
-/* responsive: on load ensure catalog shown */
-renderCatalog();
+    // small accessibility touches
+    document.querySelectorAll('button').forEach(b=> b.addEventListener('keyup', e=>{ if(e.key===' '||e.key==='Enter') b.click(); }));
 
-/* other niceties: clicking product images opens full */
-document.body.addEventListener('click', e=>{
-  const img = e.target.closest('.thumb'); if(!img) return;
-  const src = img.src;
-  const win = window.open('', '_blank');
-  win.document.write(`<img src="${src}" style="max-width:100%;display:block;margin:auto;padding:20px">`);
-});
+    // Prevent runaway intervals when leaving page
+    window.addEventListener('beforeunload', ()=> stopGame());
 
-/* small utility: update per-piece controls visibility when pieces changes */
-controls.pieces.addEventListener('change', ()=> {
-  const p = parseInt(controls.pieces.value);
-  // show/hide piece color inputs
-  $('#fill2').parentElement.style.display = p>=2 ? 'flex' : 'none';
-  $('#stroke2').parentElement.style.display = p>=2 ? 'flex' : 'none';
-  $('#fill3').parentElement.style.display = p>=3 ? 'flex' : 'none';
-  $('#stroke3').parentElement.style.display = p>=3 ? 'flex' : 'none';
-  draw();
-});
-/* initialize visibility */
-controls.pieces.dispatchEvent(new Event('change'));
-
-/* small tweak: clicking sample product quick-add */
-$('#catalogGrid').addEventListener('dblclick', e=>{
-  const card = e.target.closest('.card'); if(!card) return;
-  alert('Doble clic detectado — aqui podrías abrir edición o vista detallada.');
-});
-
-/* escape for safety */
-</script>
+    // Small initial animation
+    document.querySelectorAll('.card').forEach((c,i)=> c.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:450,delay:i*70,easing:'cubic-bezier(.2,.9,.3,1)'}));
+  </script>
 </body>
 </html>
+
